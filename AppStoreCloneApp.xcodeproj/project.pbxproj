@@ -13,6 +13,7 @@
 		BA0C0C1A2064D7A500EB5103 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA0C0C192064D7A500EB5103 /* Assets.xcassets */; };
 		BA0C0C1D2064D7A500EB5103 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA0C0C1B2064D7A500EB5103 /* LaunchScreen.storyboard */; };
 		BA0C0C252064E28A00EB5103 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C0C242064E28A00EB5103 /* CategoryCell.swift */; };
+		BA0C0C2A20650F5500EB5103 /* AppCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C0C2920650F5500EB5103 /* AppCategory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		BA0C0C1C2064D7A500EB5103 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA0C0C1E2064D7A500EB5103 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA0C0C242064E28A00EB5103 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		BA0C0C2920650F5500EB5103 /* AppCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCategory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		BA0C0C112064D7A500EB5103 /* AppStoreCloneApp */ = {
 			isa = PBXGroup;
 			children = (
+				BA0C0C2820650F2300EB5103 /* Models */,
 				BA0C0C122064D7A500EB5103 /* AppDelegate.swift */,
 				BA0C0C142064D7A500EB5103 /* FeaturedAppsController.swift */,
 				BA0C0C162064D7A500EB5103 /* Main.storyboard */,
@@ -65,6 +68,14 @@
 				BA0C0C242064E28A00EB5103 /* CategoryCell.swift */,
 			);
 			path = AppStoreCloneApp;
+			sourceTree = "<group>";
+		};
+		BA0C0C2820650F2300EB5103 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BA0C0C2920650F5500EB5103 /* AppCategory.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +153,7 @@
 				BA0C0C152064D7A500EB5103 /* FeaturedAppsController.swift in Sources */,
 				BA0C0C132064D7A500EB5103 /* AppDelegate.swift in Sources */,
 				BA0C0C252064E28A00EB5103 /* CategoryCell.swift in Sources */,
+				BA0C0C2A20650F5500EB5103 /* AppCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

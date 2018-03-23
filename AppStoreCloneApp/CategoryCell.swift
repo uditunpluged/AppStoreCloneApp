@@ -9,6 +9,15 @@
 import UIKit
 
 class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+    
+    var appCategory : AppCategory? {
+        didSet{
+            if let name = appCategory?.name{
+                categoryNameLabel.text = name
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -17,9 +26,9 @@ class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollecti
     required init?(coder aDecoder: NSCoder) {
         fatalError("init coder has not been implemented")
     }
-
+    
     // This method returns one blue colored collection view
-    func appsCollectionView() -> UICollectionView  {
+    let appsCollectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         //to change the default scrolldirection inside each blue colored view to 
         layout.scrollDirection = .horizontal
@@ -28,29 +37,29 @@ class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollecti
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
-    }
+    }()
     
-    func categoryNameLabel() -> UILabel {
+    let categoryNameLabel:UILabel = {
         let label = UILabel()
         label.text = "Category Name"
         label.font = UIFont.systemFont(ofSize: 20)
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }
-    func dividerLine() -> UIView {
+    }()
+    let dividerLine:UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.gray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }
-
+    }()
+    
     
     func setupViews()  {
         backgroundColor = UIColor.clear
-        let appCV = appsCollectionView()
-        let dividerLineView = dividerLine()
-        let categoryTitle = categoryNameLabel()
+        let appCV = appsCollectionView
+        let dividerLineView = dividerLine
+        let categoryTitle = categoryNameLabel
         
         appCV.dataSource = self
         appCV.delegate = self
@@ -76,11 +85,15 @@ class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollecti
     
     //MARK: DATASOURCE METHODS
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         return 5
+        if let count = appCategory?.apps?.count{
+            return count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "appCellId", for: indexPath) as! AppCell
+        cell.appData = appCategory?.apps?[indexPath.item]
         return cell
     }
     
@@ -100,6 +113,26 @@ class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollecti
 
 //MARK: This class contains the layout of the app item cell
 class AppCell : UICollectionViewCell{
+    
+    var appData:App?{
+        didSet{
+            if let name = appData?.name{
+            appTitle.text = name
+            }
+            
+            if let price = appData?.price{
+                priceLabel.text = "$\(price)"
+            }
+            
+            if let category = appData?.category {
+                categoryLabel.text = category
+            }
+            if let imageURL = appData?.imageName{
+                ourImageView.image = UIImage(named:imageURL)
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -109,7 +142,7 @@ class AppCell : UICollectionViewCell{
         fatalError("init coder has not been implemented")
     }
     
-    func ourImageView() -> UIImageView {
+    let ourImageView:UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage (named:"dummy")
         iv.contentMode = .scaleAspectFill
@@ -117,37 +150,37 @@ class AppCell : UICollectionViewCell{
         iv.layer.cornerRadius = 16
         iv.layer.masksToBounds = true
         return iv
-    }
+    }()
     
-    func appTitle() -> UILabel {
+    let appTitle:UILabel = {
         let label = UILabel()
         label.text = "MY RANDOm app name here"
         label.font = UIFont.systemFont(ofSize: 15)
         label.numberOfLines = 2
         return label
-    }
+    }()
     
-    func categoryLabel() -> UILabel {
+    let categoryLabel:UILabel = {
         let label = UILabel()
         label.text = "Category"
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.darkGray
         return label
-    }
+    }()
     
-    func priceLabel() -> UILabel {
+    let priceLabel: UILabel = {
         let label = UILabel()
         label.text = "Price"
         label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = UIColor.darkGray
         return label
-    }
-
+    }()
+    
     func setupViews()  {
-        let imageView = ourImageView()
-        let title = appTitle()
-        let label = categoryLabel()
-        let price = priceLabel()
+        let imageView = ourImageView
+        let title = appTitle
+        let label = categoryLabel
+        let price = priceLabel
         imageView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.width)
         title.frame = CGRect(x: 0, y: frame.width + 4, width: frame.width, height: 40)
         label.frame = CGRect(x: 0, y: frame.width + 40, width: frame.width, height: 20)
