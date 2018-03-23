@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollectionViewDelegate {
+class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -18,8 +18,11 @@ class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollecti
         fatalError("init coder has not been implemented")
     }
 
+    // This method returns one blue colored collection view
     func appsCollectionView() -> UICollectionView  {
         let layout = UICollectionViewFlowLayout()
+        //to change the default scrolldirection inside each blue colored view to horizontal
+        layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.blue
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +52,12 @@ class CategoryCell : UICollectionViewCell, UICollectionViewDataSource,UICollecti
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "appCellId", for: indexPath) as! AppCell
-        return cell 
+        return cell
+    }
+    
+    //MARK: SIZING METHODS
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 150 , height:collectionView.frame.height )
     }
     
 }
